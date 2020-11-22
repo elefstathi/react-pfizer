@@ -1,17 +1,19 @@
 import { Card } from "antd";
 import "antd/dist/antd.css";
-import "./Welcome.css";
 
 export default function WelcomeCard() {
   return (
-    <div className="site-card-border-less-wrapper">
+    <div style={containerStyle}>
       <Card
         title="Welcome to Code.Hub Dashboard!"
         bordered={false}
-        style={{ width: "100%", backgroundColor: "#ececec", textAlign: "center" }}
+        style={cardStyle}
       >
         <p>Manage everything and have fun!</p>
       </Card>
     </div>
   );
 }
+
+const containerStyle = { padding: "30px", background: "#fff" };
+const cardStyle = { width: "100%", backgroundColor: "#ececec", textAlign: "center" };

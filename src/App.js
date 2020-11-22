@@ -2,9 +2,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Link
 } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 
@@ -26,7 +24,7 @@ function App() {
           <Route path="/topics">
             <Topics />
           </Route> */}
-          <Route path="/" component={Dashboard}/>
+          <Route path="/"><Dashboard/></Route>
         </Switch>
       </div>
     </Router>
