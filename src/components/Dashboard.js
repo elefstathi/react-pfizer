@@ -5,6 +5,7 @@ import { Layout, Menu, Row, Spin} from "antd";
 import "antd/dist/antd.css";
 import StatisticItem from "./StatisticItem";
 import FetchData from "./FetchData";
+import CourseTable from "./CourseTable";
 import API_BASE_URL from "../api/BaseApi";
 
 export default function Dashboard() {
@@ -33,6 +34,7 @@ export default function Dashboard() {
         }
       </FetchData>
       </Row>
+        <CourseTable/>
     </Layout>
   );
 }
