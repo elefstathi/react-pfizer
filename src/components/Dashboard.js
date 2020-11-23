@@ -34,7 +34,7 @@ export default function Dashboard() {
         }
       </FetchData>
       </Row>
-        <CourseTable/>
+      <CourseTable/>
     </Layout>
   );
 }
