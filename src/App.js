@@ -5,6 +5,7 @@ import {
   Link
 } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import Courses from "./components/Courses";
 
 function App() {
   return (
@@ -13,17 +14,13 @@ function App() {
       <div className="App">
       <nav>
         <Link to="/"></Link>
-        {/* <Link to="/about">About</Link>
-        <Link to="/company">Company</Link> */}
+        <Link to="/courses"></Link>
+        {/* <Link to="/company">Company</Link> */} 
       </nav>
 
         <Switch>
-          {/* <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route> */}
+          <Route path="/courses"><Courses/></Route>
+          {/* <Route path="/topics"><Topics /></Route> */}
           <Route path="/"><Dashboard/></Route>
         </Switch>
       </div>
