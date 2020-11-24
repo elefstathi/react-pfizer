@@ -21,10 +21,14 @@ function App() {
       </nav>
 
         <Switch>
-          <Route path="/courses"><Courses/></Route>
-          <Route path="/courses_details"><CoursesDetails/></Route>
+          <Route exact path="/courses"><Courses/></Route>
+          <Route path="/courses_details/:courseId"
+            render={(props) => (
+              <CoursesDetails {...props} course=""/>
+            )}
+          />
           {/* <Route path="/new_course"><AddNewCourse/></Route> */}
-          <Route path="/"><Dashboard/></Route>
+          <Route exact path="/"><Dashboard/></Route>
         </Switch>
       </div>
     </Router>

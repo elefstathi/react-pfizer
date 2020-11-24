@@ -1,9 +1,11 @@
 import { Card, Spin, Table } from "antd";
 import FetchData from "./FetchData";
 import API_BASE_URL from "../api/BaseApi";
-import CourseTableColums from "./CourseTableColums";
+import { courseTableColumns } from "./CourseTableColumns";
 
 const CourseTable = () => {
+  const columns = courseTableColumns();
+  
   const renderTable = ( data ) => {
     return (
       <div style={containerStyle}>
@@ -12,7 +14,7 @@ const CourseTable = () => {
           title="Last 5 courses"
           style={cardStyle}
         >
-          <Table columns={CourseTableColums} dataSource={data} pagination={false} ></Table>
+          <Table columns={columns} dataSource={data} pagination={false} ></Table>
           <br/>
           <div style={{display: "flex"}}>
             <button style={btnStyle} onClick={() => getCourses(true)}>View All</button>
