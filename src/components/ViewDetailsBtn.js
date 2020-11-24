@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 function ViewDetailsBtn({ record }) {
-  console.log(record);
+  const [btnColor, setColor] = useState("#005f6a");
   const history = useHistory();
+
   const onHandleClicked = () => {
+    setColor("#000");
     history.push(`/courses_details/${record.id}`, record);
   };
   const btnStyle = {
