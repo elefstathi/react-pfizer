@@ -46,7 +46,7 @@ const CourseTableColums = [
 var btnStyle = { color: "#fff", background: "#005f6a", borderRadius: "5px" };
 
 const viewCourseDetails = (record) => {
-  
+  window.location.href='/courses_details'
 };
 
 const checkIcon= (open) => (
