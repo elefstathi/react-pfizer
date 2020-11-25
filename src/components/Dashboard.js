@@ -9,6 +9,7 @@ import FetchData from "./FetchData";
 import CourseTable from "./CourseTable";
 import API_BASE_URL from "../api/BaseApi";
 import { useHistory } from "react-router-dom";
+import Form from "./Form";
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -18,6 +19,9 @@ export default function Dashboard({ match, location }) {
   const onHandleShowCourses = () => {
     history.push("/courses");
   };
+  const onHandleAddCourse = () => {
+    history.push("/add_new_course");
+  }
 
   return (
     <Layout>
@@ -28,7 +32,7 @@ export default function Dashboard({ match, location }) {
             <Menu.Item key="1" onClick={() => onHandleShowCourses()}>
               <Text style={{ color: "#fff" }}>Courses</Text>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="2" onClick={() => onHandleAddCourse()}>
               <Text style={{ color: "#fff" }}>Add new course</Text>
             </Menu.Item>
           </Menu>
@@ -62,6 +66,7 @@ export default function Dashboard({ match, location }) {
       {location.pathname.includes("/courses_details") && (
         <CoursesDetails course={location.state} />
       )}
+      {location.pathname === "/add_new_course" && <Form/>}
     </Layout>
   );
 }
