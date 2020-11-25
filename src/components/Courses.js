@@ -1,7 +1,8 @@
 import CourseCardId from "./CourseCardId";
-import { Spin, List } from "antd";
+import { Spin, List, Typography } from "antd";
 import FetchData from "./FetchData";
 import API_BASE_URL from "../api/BaseApi";
+const { Title } = Typography;
 
 const Courses = ({ location }) => {
   return (
@@ -10,7 +11,8 @@ const Courses = ({ location }) => {
         isLoading ? (
           <Spin size="large" />
         ) : (
-          <div style={{padding: 30, marginTop: 64}}>
+          <div style={{padding: 30 }}>
+          <Title level={2}>All Courses</Title>
           <List
             grid={{ gutter: 16, column: 3 }}
             dataSource={data}
