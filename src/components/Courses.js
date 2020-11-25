@@ -15,7 +15,7 @@ const Courses = ({ location }) => {
             grid={{ gutter: 16, column: 3 }}
             dataSource={data}
             renderItem={(item) => (
-              <List.Item>
+              <List.Item key={item.id}>
                 <CourseCardId course={item} />
               </List.Item>
             )}
