@@ -11,22 +11,17 @@ function App() {
           <Link to="/"></Link>
           <Link to="/courses"></Link>
           <Link to="/courses_details"></Link>
-          {/* <Link to="/new_course"></Link> */}
         </nav>
-
-        {/* <Switch> */}
-        <Route exact path="/courses">
-          <Courses />
-        </Route>
-        <Route
-          path="/courses_details/:courseId"
-          render={(props) => <CoursesDetails {...props} course="" />}
-        />
-        <Route
-          path="/"
-          render={(props) => <Dashboard {...props}/>}
-        />
-        {/* </Switch> */}
+        <Switch>
+          <Route path="/" render={(props) => <Dashboard {...props} />} />
+          <Route path="/courses"
+            render={(props) => <Courses {...props} />}
+          />
+          <Route
+            path="/courses_details/:courseId"
+            render={(props) => <CoursesDetails {...props} course="" />}
+          />
+        </Switch>
       </div>
     </Router>
   );
