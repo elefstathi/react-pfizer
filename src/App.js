@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Courses from "./components/Courses";
 import CoursesDetails from "./components/CoursesDetails";
-import Form from "./components/Form";
+import FormAddCourse from "./components/Form";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           />
           <Route
             path="/add_new_course"
-            render={(props) => <Form {...props} />}
+            render={(props) => <FormAddCourse {...props} />}
           />
         </Switch>
       </div>

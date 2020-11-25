@@ -9,7 +9,7 @@ import FetchData from "./FetchData";
 import CourseTable from "./CourseTable";
 import API_BASE_URL from "../api/BaseApi";
 import { useHistory } from "react-router-dom";
-import Form from "./Form";
+import FormAddCourse from "./Form";
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -66,7 +66,7 @@ export default function Dashboard({ match, location }) {
       {location.pathname.includes("/courses_details") && (
         <CoursesDetails course={location.state} />
       )}
-      {location.pathname === "/add_new_course" && <Form/>}
+      {location.pathname === "/add_new_course" && <FormAddCourse/>}
     </Layout>
   );
 }
