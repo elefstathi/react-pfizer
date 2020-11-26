@@ -37,9 +37,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const FormAddCourse = (courseData) => {
-  console.log(courseData);
-  const course = undefined;
+const FormAddCourse = (course) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const [formData, setFormData] = useState( course ? course : {});
@@ -237,7 +235,7 @@ const FormAddCourse = (courseData) => {
                   <Checkbox
                     value="01"
                     style={{ lineHeight: "32px" }}
-                    // checked={formData.instructors.find(item => item === '01') ? true : false}
+                    checked={formData.instructors && formData.instructors.find(item => item === '01') ? true : false}
                     onChange={onChangeInstructors}
                   >
                     John Tsevdos
@@ -246,7 +244,7 @@ const FormAddCourse = (courseData) => {
                 <Col span={16}>
                   <Checkbox
                     value="02"
-                    // checked={formData.instructors.find(item => item === '02') ? true : false}
+                    checked={ formData.instructors && formData.instructors.find(item => item === '02') ? true : false}
                     style={{ lineHeight: "32px" }}
                     onChange={onChangeInstructors}
                   >
@@ -266,6 +264,7 @@ const FormAddCourse = (courseData) => {
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
               <DatePicker
+                value={formData.dates && formData.dates.start_date}
                 disabledDate={disabledDate}
                 placeholder="Start Date"
                 onChange={(value, e) => onChangeStartDate(value, e)}
@@ -277,6 +276,7 @@ const FormAddCourse = (courseData) => {
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
               <DatePicker
+                value={formData.dates && formData.dates.end_date}
                 disabledDate={disabledDate}
                 placeholder="End Date"
                 onChange={(value, e) => onChangeEndDate(value, e)}
@@ -298,6 +298,7 @@ const FormAddCourse = (courseData) => {
                 ]}
               >
                 <InputNumber
+                  value={formData.price && formData.price.early_bird}
                   onChange={onEarlyBirdChange}
                 />
               </Form.Item>
@@ -314,6 +315,7 @@ const FormAddCourse = (courseData) => {
                 ]}
               >
                 <InputNumber
+                  value={formData.price && formData.price.normal}
                   onChange={onNormalPriceChange}
                 />
               </Form.Item>
