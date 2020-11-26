@@ -54,6 +54,11 @@ const CoursesDetails = ({ location, course }) => {
     history.push('/add_new_course', objData);
   } 
 
+  const handleDelete = async () => {
+    await axios.delete(`${API_BASE_URL}/courses/${id}`);
+    history.push("/courses");
+  }
+
   const renderCourseDetail = () => {
     return (
       <>
@@ -103,7 +108,7 @@ const CoursesDetails = ({ location, course }) => {
                 </button>
                 <button
                   style={deleteStyle}
-                  onClick={() => console.log("delete")}
+                  onClick={handleDelete}
                 >
                   Delete
                 </button>
