@@ -8,16 +8,16 @@ import {
   Input,
   InputNumber,
   DatePicker,
-  Select,
   Checkbox,
+  Switch,
   Button,
   AutoComplete,
 } from "antd";
+import moment from "moment";
+import { useState } from "react";
 
 const { Content } = Layout;
 const { Title } = Typography;
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 
 const formItemLayout = {
   labelCol: {
@@ -37,9 +37,148 @@ const layout = {
 
 const FormAddCourse = ({ location }) => {
   const [form] = Form.useForm();
+  const [formData, setFormData] = useState({
+    title: '',
+    imagePath: '',
+    price: {
+      normal: 0,
+      early_bird: 0
+    },
+    dates: {
+      start_date: '',
+      end_date: ''
+    },
+    duration: '',
+    open: false,
+    instructors: [],
+    description: ''
+  });
+
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    console.log(values.dates[0])
   };
+
+  function onChangeStartDate(date, e) {   
+       setFormData((formData) => ({
+         ...formData,
+          dates: {
+            ...formData.dates,
+            start_date: e
+          }
+       }))
+  }
+
+  function onTitleChange(e) {
+    const newTitle = e.target.value;
+    setFormData((formData) => ({
+      ...formData,
+         title: {
+          ...formData.title,
+          title: newTitle
+        }
+    }))
+  }
+
+  function onDurationChange(e) {
+    const newDur = e.target.value;
+    setFormData((formData) => ({
+      ...formData,
+         duration: {
+          ...formData.duration,
+          duration: newDur
+        }
+    }))
+  }
+
+  function onImgPathChange(e) {
+    const newPath = e.target.value;
+    setFormData((formData) => ({
+      ...formData,
+         imagePath: {
+          ...formData.imagePath,
+          imagePath: newPath
+        }
+    }))
+  }
+
+  function onDescriptionChange(e) {
+    const newDesc = e.target.value;
+    setFormData((formData) => ({
+      ...formData,
+         description: {
+          ...formData.description,
+          description: newDesc
+        }
+    }))
+  }
+
+  function onChangeBookable(checked) {
+    setFormData((formData) => ({
+      ...formData,
+         open: {
+          ...formData.open,
+          open: checked
+        }
+    }))
+  }
+
+  function onChange_1(e) {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    setFormData((prevState) => {
+      let newState = {...prevState};
+      if (checked) {
+        newState.instructors = newState.instructors.concat(value);
+      } else {
+        const index = newState.instructors.indexOf(value);
+        if (index > -1) {
+          newState.instructors.splice(index, 1);
+        }
+      }
+      return newState;
+    });
+    console.log(formData);
+  }
+
+  function onChangeEndDate(date, e) {   
+    setFormData((formData) => ({
+      ...formData,
+       dates: {
+         ...formData.dates,
+         end_date: e
+       }
+    }))
+  }
+
+  function onEarlyBirdChange(data, e) {
+    setFormData((formData) => ({
+      ...formData,
+       dates: {
+         ...formData.price,
+         early_bird: e
+       }
+    }))
+  }
+
+  function onNormalPriceChange(data, e) {
+    setFormData((formData) => ({
+      ...formData,
+       dates: {
+         ...formData.price,
+         normal: e
+       }
+    }))
+  }
+
+  function disableForEndDate(current) {
+    return current && current < moment(formData.dates.start_date);
+  }
+
+  function disabledDate(current) {
+    // Can not select days before today and today
+    return current && current < moment().endOf("day");
+  }
 
   return (
     <Layout style={{ padding: 30 }}>
@@ -67,7 +206,7 @@ const FormAddCourse = ({ location }) => {
               },
             ]}
           >
-            <Input placeholder="Title" />
+            <Input onChange={onTitleChange} placeholder="Title" />
           </Form.Item>
           <Form.Item
             name="duration"
@@ -80,35 +219,30 @@ const FormAddCourse = ({ location }) => {
               },
             ]}
           >
-            <Input placeholder="Duration" />
+            <Input onChange={onDurationChange} placeholder="Duration" />
           </Form.Item>
           <Form.Item
             name="imagePath"
             label="Image path"
             rules={[
               {
-                required: true,
                 message: "Please input a valid image url!",
               },
             ]}
           >
-            <Input placeholder="Image Path" />
+            <Input onChange={onImgPathChange} placeholder="Image Path" />
           </Form.Item>
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}
-            name="bookable"
+            name="open"
             label="Bookable"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            valuePropName="checked"
           >
-            <Checkbox></Checkbox>
+            <Switch onChange={onChangeBookable} />
           </Form.Item>
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}
-            name="checkbox-group"
+            name="instructors"
             label="Instructors"
             rules={[
               {
@@ -119,39 +253,39 @@ const FormAddCourse = ({ location }) => {
             <Checkbox.Group>
               <Row>
                 <Col span={16}>
-                  <Checkbox value="John" style={{ lineHeight: "32px" }}>
+                  <Checkbox value="01" style={{ lineHeight: "32px" }} onChange={onChange_1}>
                     John Tsevdos
                   </Checkbox>
                 </Col>
                 <Col span={16}>
-                  <Checkbox value="Yiannis" style={{ lineHeight: "32px" }}>
+                  <Checkbox value="02" style={{ lineHeight: "32px" }} onChange={onChange_1}>
                     Yiannis Nikopoulos
                   </Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>
           </Form.Item>
-          <Form.Item name={"description"} label="Description">
-            <Input.TextArea />
+          <Form.Item name="description" label="Description">
+            <Input.TextArea onChange={onDescriptionChange}/>
           </Form.Item>
-          <Form.Item name="dates" label="Dates" rules={[{ required: true }]}>
+          <Form.Item label="Dates" rules={[{ required: true }]}>
             <Form.Item
-              // validateStatus="error"
-              // help="Please select the correct date"
+              name="start_date"
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker placeholder="Start Date" />
+              <DatePicker disabledDate={disabledDate} placeholder="Start Date" onChange={(value, e) => onChangeStartDate(value,e)}/>
             </Form.Item>
             <Form.Item
+              name="end_date"
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker placeholder="End Date" />
+              <DatePicker disabledDate={disableForEndDate} placeholder="End Date" onChange={(value, e) => onChangeEndDate(value,e)}/>
             </Form.Item>
           </Form.Item>
           <Form.Item label="Price">
             <Row>
               <Form.Item
-                name="earlyBird"
+                name="early_bird"
                 label="Early Bird"
                 rules={[
                   {
@@ -162,10 +296,10 @@ const FormAddCourse = ({ location }) => {
                   },
                 ]}
               >
-                <InputNumber />
+                <InputNumber onChange={(value, e) => onEarlyBirdChange(value,e)}/>
               </Form.Item>
               <Form.Item
-                name="normalPrice"
+                name="normal"
                 label="Normal Price"
                 rules={[
                   {
@@ -176,7 +310,7 @@ const FormAddCourse = ({ location }) => {
                   },
                 ]}
               >
-                <InputNumber />
+                <InputNumber onChange={(value, e) => onNormalPriceChange(value,e)}/>
               </Form.Item>
             </Row>
           </Form.Item>
