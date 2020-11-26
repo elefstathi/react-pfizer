@@ -5,6 +5,7 @@ import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 import API_BASE_URL from "../api/BaseApi";
 import { green, red } from "@material-ui/core/colors";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const { Title, Text } = Typography;
 const { Content, Footer } = Layout;
@@ -13,28 +14,12 @@ const CoursesDetails = ({ location, course }) => {
   const [courseInstructors, setInstructors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const history = useHistory();
+  const { title, id, description, duration, dates, imagePath, instructors, open, price} = course;
 
-  const {
-    title,
-    id,
-    description,
-    duration,
-    dates,
-    imagePath,
-    instructors,
-    open,
-    price,
-  } = course;
-
-  const editStyle = {
-    color: "#fff",
-    background: "#002BC6",
-    borderRadius: "5px",
+  const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px",
   };
-  const deleteStyle = {
-    color: "#fff",
-    background: "#DB1F2A",
-    borderRadius: "5px",
+  const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px",
   };
   const rowStyle = { flex: 1, justifyContent: "space-between", marginRight: 5 };
 
@@ -63,6 +48,12 @@ const CoursesDetails = ({ location, course }) => {
     return instructors.map((id) => data.filter((item) => item.id === id ) );
   }
 
+  const handleEdit = () => {
+    const objData = { title, id, description, duration, dates, imagePath, instructors, open, price};
+    console.log(objData);
+    history.push('/add_new_course', objData);
+  } 
+
   const renderCourseDetail = () => {
     return (
       <>
@@ -78,10 +69,11 @@ const CoursesDetails = ({ location, course }) => {
                 justifyContent: "center",
               }}
             >
-              <img
+             { imagePath && (<img
                 style={{ width: "50%", height: "40%" }}
                 src={`${API_BASE_URL}/${imagePath}`}
               />
+            )} 
             </Content>
             <Footer>
               <Row style={rowStyle}>
@@ -106,7 +98,7 @@ const CoursesDetails = ({ location, course }) => {
               <br />
               <div dangerouslySetInnerHTML={{ __html: description }}></div>
               <Row>
-                <button style={editStyle} onClick={() => console.log("edit")}>
+                <button style={editStyle} onClick={handleEdit}>
                   Edit
                 </button>
                 <button

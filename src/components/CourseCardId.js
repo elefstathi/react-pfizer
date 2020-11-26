@@ -32,7 +32,7 @@ const CourseCardId = (course) => {
       headStyle={{ flex: 1, flexShrink: 1 }}
       hoverable
       style={{ width: 290, height: 500 }}
-      cover={<img src={`${API_BASE_URL}/${record.imagePath}`} />}
+      cover={record.imagePath && <img src={`${API_BASE_URL}/${record.imagePath}`} />}
     >
       <Row>
         <Text>

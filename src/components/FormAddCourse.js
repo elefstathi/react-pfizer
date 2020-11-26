@@ -11,10 +11,12 @@ import {
   Checkbox,
   Switch,
   Button,
-  AutoComplete,
 } from "antd";
+import axios from 'axios';
 import moment from "moment";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import API_BASE_URL from "../api/BaseApi";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -35,140 +37,116 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const FormAddCourse = ({ location }) => {
+const FormAddCourse = (courseData) => {
+  console.log(courseData);
+  const course = undefined;
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState({
-    title: '',
-    imagePath: '',
-    price: {
-      normal: 0,
-      early_bird: 0
-    },
-    dates: {
-      start_date: '',
-      end_date: ''
-    },
-    duration: '',
-    open: false,
-    instructors: [],
-    description: ''
-  });
+  const history = useHistory();
+  const [formData, setFormData] = useState( course ? course : {});
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    console.log(values.dates[0])
+    axios.post(`${API_BASE_URL}/courses`, formData)
+      .then(response => history.push("/courses"))
+      .catch((error) => {alert('Something went wrong', 'Try again!')})
   };
 
-  function onChangeStartDate(date, e) {   
-       setFormData((formData) => ({
-         ...formData,
-          dates: {
-            ...formData.dates,
-            start_date: e
-          }
-       }))
+  function onChangeStartDate(date, e) {
+    setFormData((formData) => ({
+      ...formData,
+      dates: {
+        ...formData.dates,
+        start_date: e,
+      },
+    }));
   }
 
   function onTitleChange(e) {
     const newTitle = e.target.value;
     setFormData((formData) => ({
-      ...formData,
-         title: {
-          ...formData.title,
-          title: newTitle
-        }
-    }))
+      ...formData, title: newTitle,
+    }));
+    console.log(formData);
   }
 
   function onDurationChange(e) {
     const newDur = e.target.value;
     setFormData((formData) => ({
-      ...formData,
-         duration: {
-          ...formData.duration,
-          duration: newDur
-        }
-    }))
+      ...formData, duration: newDur,
+    }));
   }
 
   function onImgPathChange(e) {
     const newPath = e.target.value;
     setFormData((formData) => ({
-      ...formData,
-         imagePath: {
-          ...formData.imagePath,
-          imagePath: newPath
-        }
-    }))
+      ...formData, imagePath: newPath,
+    }));
   }
 
   function onDescriptionChange(e) {
     const newDesc = e.target.value;
     setFormData((formData) => ({
-      ...formData,
-         description: {
-          ...formData.description,
-          description: newDesc
-        }
-    }))
+      ...formData, description: newDesc,
+    }));
   }
 
   function onChangeBookable(checked) {
     setFormData((formData) => ({
-      ...formData,
-         open: {
-          ...formData.open,
-          open: checked
-        }
-    }))
+      ...formData, open: checked,
+    }));
   }
 
-  function onChange_1(e) {
+  function onChangeInstructors(e) {
     const value = e.target.value;
     const checked = e.target.checked;
     setFormData((prevState) => {
-      let newState = {...prevState};
+      let newState = { ...prevState };
       if (checked) {
-        newState.instructors = newState.instructors.concat(value);
+        if (newState.instructors !== undefined) {
+          newState.instructors = newState.instructors.concat(value);
+        } else {
+          newState.instructors = [];
+          newState.instructors.push(value);
+        }
       } else {
-        const index = newState.instructors.indexOf(value);
-        if (index > -1) {
-          newState.instructors.splice(index, 1);
+        if (newState.instructors !== undefined) {
+          const index = newState.instructors.indexOf(value);
+          if (index > -1) {
+            newState.instructors.splice(index, 1); //remove one element at index
+          }
         }
       }
       return newState;
     });
-    console.log(formData);
   }
 
-  function onChangeEndDate(date, e) {   
+  function onChangeEndDate(date, e) {
     setFormData((formData) => ({
       ...formData,
-       dates: {
-         ...formData.dates,
-         end_date: e
-       }
-    }))
+      dates: {
+        ...formData.dates,
+        end_date: e,
+      },
+    }));
   }
 
-  function onEarlyBirdChange(data, e) {
+  function onEarlyBirdChange(value) {
     setFormData((formData) => ({
       ...formData,
-       dates: {
-         ...formData.price,
-         early_bird: e
-       }
-    }))
+      price: {
+        ...formData.price,
+        early_bird: value,
+      },
+    }));
   }
 
-  function onNormalPriceChange(data, e) {
+  function onNormalPriceChange(value) {
     setFormData((formData) => ({
       ...formData,
-       dates: {
-         ...formData.price,
-         normal: e
-       }
-    }))
+      price: {
+        ...formData.price,
+        normal: value,
+      },
+    }));
   }
 
   function disableForEndDate(current) {
@@ -182,7 +160,7 @@ const FormAddCourse = ({ location }) => {
 
   return (
     <Layout style={{ padding: 30 }}>
-      <Title level={2}>Add Course</Title>
+      <Title level={2}>{course ? 'Edit Course' : 'Add Course'}</Title>
       <Content>
         <Form
           {...formItemLayout}
@@ -197,6 +175,7 @@ const FormAddCourse = ({ location }) => {
         >
           <Form.Item
             name="title"
+            value={formData.title}
             label="Title"
             rules={[
               {
@@ -211,6 +190,7 @@ const FormAddCourse = ({ location }) => {
           <Form.Item
             name="duration"
             label="Duration"
+            value={formData.duration}
             rules={[
               {
                 required: true,
@@ -224,6 +204,7 @@ const FormAddCourse = ({ location }) => {
           <Form.Item
             name="imagePath"
             label="Image path"
+            value={formData.imagePath}
             rules={[
               {
                 message: "Please input a valid image url!",
@@ -253,12 +234,22 @@ const FormAddCourse = ({ location }) => {
             <Checkbox.Group>
               <Row>
                 <Col span={16}>
-                  <Checkbox value="01" style={{ lineHeight: "32px" }} onChange={onChange_1}>
+                  <Checkbox
+                    value="01"
+                    style={{ lineHeight: "32px" }}
+                    // checked={formData.instructors.find(item => item === '01') ? true : false}
+                    onChange={onChangeInstructors}
+                  >
                     John Tsevdos
                   </Checkbox>
                 </Col>
                 <Col span={16}>
-                  <Checkbox value="02" style={{ lineHeight: "32px" }} onChange={onChange_1}>
+                  <Checkbox
+                    value="02"
+                    // checked={formData.instructors.find(item => item === '02') ? true : false}
+                    style={{ lineHeight: "32px" }}
+                    onChange={onChangeInstructors}
+                  >
                     Yiannis Nikopoulos
                   </Checkbox>
                 </Col>
@@ -266,20 +257,30 @@ const FormAddCourse = ({ location }) => {
             </Checkbox.Group>
           </Form.Item>
           <Form.Item name="description" label="Description">
-            <Input.TextArea onChange={onDescriptionChange}/>
+            <Input.TextArea onChange={onDescriptionChange} />
           </Form.Item>
-          <Form.Item label="Dates" rules={[{ required: true }]}>
+          <Form.Item label="Dates">
             <Form.Item
+              rules={[{ required: true }]}
               name="start_date"
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker disabledDate={disabledDate} placeholder="Start Date" onChange={(value, e) => onChangeStartDate(value,e)}/>
+              <DatePicker
+                disabledDate={disabledDate}
+                placeholder="Start Date"
+                onChange={(value, e) => onChangeStartDate(value, e)}
+              />
             </Form.Item>
             <Form.Item
+              rules={[{ required: true }]}
               name="end_date"
               style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker disabledDate={disableForEndDate} placeholder="End Date" onChange={(value, e) => onChangeEndDate(value,e)}/>
+              <DatePicker
+                disabledDate={disabledDate}
+                placeholder="End Date"
+                onChange={(value, e) => onChangeEndDate(value, e)}
+              />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Price">
@@ -296,7 +297,9 @@ const FormAddCourse = ({ location }) => {
                   },
                 ]}
               >
-                <InputNumber onChange={(value, e) => onEarlyBirdChange(value,e)}/>
+                <InputNumber
+                  onChange={onEarlyBirdChange}
+                />
               </Form.Item>
               <Form.Item
                 name="normal"
@@ -310,7 +313,9 @@ const FormAddCourse = ({ location }) => {
                   },
                 ]}
               >
-                <InputNumber onChange={(value, e) => onNormalPriceChange(value,e)}/>
+                <InputNumber
+                  onChange={onNormalPriceChange}
+                />
               </Form.Item>
             </Row>
           </Form.Item>
