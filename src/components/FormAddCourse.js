@@ -6,7 +6,7 @@ import {
   Col,
   Form,
   Input,
-  TimePicker,
+  InputNumber,
   DatePicker,
   Select,
   Checkbox,
@@ -14,8 +14,8 @@ import {
   AutoComplete,
 } from "antd";
 
-const { Content, Footer } = Layout;
-const { Title, Text } = Typography;
+const { Content } = Layout;
+const { Title } = Typography;
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
@@ -58,7 +58,7 @@ const FormAddCourse = ({ location }) => {
         >
           <Form.Item
             name="title"
-            label="title"
+            label="Title"
             rules={[
               {
                 required: true,
@@ -67,11 +67,11 @@ const FormAddCourse = ({ location }) => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Title" />
           </Form.Item>
           <Form.Item
             name="duration"
-            label="duration"
+            label="Duration"
             rules={[
               {
                 required: true,
@@ -80,11 +80,11 @@ const FormAddCourse = ({ location }) => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Duration" />
           </Form.Item>
           <Form.Item
             name="imagePath"
-            label="image path"
+            label="Image path"
             rules={[
               {
                 required: true,
@@ -92,24 +92,29 @@ const FormAddCourse = ({ location }) => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Image Path" />
           </Form.Item>
           <Form.Item
-            wrapperCol={{ ...layout.wrapperCol, offset: 4 }}
+            wrapperCol={{ ...layout.wrapperCol }}
             name="bookable"
-            valuePropName="checked"
+            label="Bookable"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
           >
-            <Checkbox>Bookable</Checkbox>
-          </Form.Item>
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
+            <Checkbox></Checkbox>
           </Form.Item>
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}
             name="checkbox-group"
-            label="instructors"
+            label="Instructors"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
           >
             <Checkbox.Group>
               <Row>
@@ -126,32 +131,59 @@ const FormAddCourse = ({ location }) => {
               </Row>
             </Checkbox.Group>
           </Form.Item>
-          <Form.Item name={"description"} label="description">
+          <Form.Item name={"description"} label="Description">
             <Input.TextArea />
           </Form.Item>
-          <Form.Item label="Dates" style={{ marginBottom: 0 }}>
+          <Form.Item name="dates" label="Dates" rules={[{ required: true }]}>
             <Form.Item
-              validateStatus="error"
-              help="Please select the correct date"
-              style={{ display: "inline-block", width: "calc(50% - 12px)" }}
+              // validateStatus="error"
+              // help="Please select the correct date"
+              style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker />
+              <DatePicker placeholder="Start Date" />
             </Form.Item>
-            <span
-              style={{
-                display: "inline-block",
-                width: "24px",
-                lineHeight: "32px",
-                textAlign: "center",
-              }}
-            >
-              -
-            </span>
             <Form.Item
-              style={{ display: "inline-block", width: "calc(50% - 12px)" }}
+              style={{ display: "inline-block", width: "calc(50% + 12px)" }}
             >
-              <DatePicker />
+              <DatePicker placeholder="End Date" />
             </Form.Item>
+          </Form.Item>
+          <Form.Item label="Price">
+            <Row>
+              <Form.Item
+                name="earlyBird"
+                label="Early Bird"
+                rules={[
+                  {
+                    required: true,
+                    type: "number",
+                    min: 0,
+                    message: "Please input a valid number!",
+                  },
+                ]}
+              >
+                <InputNumber />
+              </Form.Item>
+              <Form.Item
+                name="normalPrice"
+                label="Normal Price"
+                rules={[
+                  {
+                    required: true,
+                    type: "number",
+                    min: 0,
+                    message: "Please input a valid number!",
+                  },
+                ]}
+              >
+                <InputNumber />
+              </Form.Item>
+            </Row>
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Form.Item>
         </Form>
       </Content>

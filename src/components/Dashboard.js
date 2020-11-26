@@ -9,7 +9,7 @@ import FetchData from "./FetchData";
 import CourseTable from "./CourseTable";
 import API_BASE_URL from "../api/BaseApi";
 import { useHistory } from "react-router-dom";
-import FormAddCourse from "./Form";
+import FormAddCourse from "./FormAddCourse";
 
 const { Header } = Layout;
 const { Text } = Typography;

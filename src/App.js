@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Courses from "./components/Courses";
 import CoursesDetails from "./components/CoursesDetails";
-import FormAddCourse from "./components/Form";
+import FormAddCourse from "./components/FormAddCourse";
 
 function App() {
   return (
