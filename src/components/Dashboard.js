@@ -22,12 +22,17 @@ export default function Dashboard({ match, location }) {
   const onHandleAddCourse = () => {
     history.push("/add_new_course");
   }
+  const onHandleShowDashboard = () => {
+    history.push("/");
+  }
 
   return (
     <Layout>
       <Header style={{ flex: 1}}>
         <Row>
-          <h2 style={{ color: "#fff" }}>Code.Hub Dashboard</h2>
+          <div onClick={() => onHandleShowDashboard()}>
+            <h2 style={{ color: "#fff" }}>Code.Hub Dashboard</h2>
+          </div>
           <Menu theme="dark" mode="horizontal" style={{flex:1}}>
             <Menu.Item key="1" onClick={() => onHandleShowCourses()}>
               <Text style={{ color: "#fff" }}>Courses</Text>
