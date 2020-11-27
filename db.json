@@ -98,25 +98,6 @@
         "01"
       ],
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
-    },
-    {
-      "title": "Functional Programming",
-      "duration": "2 days",
-      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdev.to%2Fnavi%2Fwhy-functional-programming-matters-2o95&psig=AOvVaw1OCovIY2jrw2d-jnyyVhqc&ust=1606514861908000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiyrrWcoe0CFQAAAAAdAAAAABAD",
-      "open": true,
-      "instructors": [
-        "01"
-      ],
-      "description": "<p>Functional programming (often abbreviated FP) is the process of building software by composing pure functions, avoiding shared state, mutable data, and side-effects. Functional programming is declarative rather than imperative, and application state flows through pure functions.</p>",
-      "dates": {
-        "start_date": "2021-02-01",
-        "end_date": "2021-02-02"
-      },
-      "price": {
-        "early_bird": 800,
-        "normal": 300
-      },
-      "id": "jZizrmM"
     }
   ],
   "instructors": [

@@ -25,7 +25,6 @@ const CourseTable = () => {
   };
 
   const getCourses = (all) => {
-    console.log('flag=', all);
     return (
       <FetchData url={API_BASE_URL} resource="courses">
         {(data, isLoading) =>

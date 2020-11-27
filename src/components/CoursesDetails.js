@@ -2,7 +2,7 @@ import { Typography, Row, Layout, Spin, Col } from "antd";
 import React, { useState, useEffect, useCallback } from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
-import API_BASE_URL from "../api/BaseApi";
+import API_BASE_URL, {API_INSTRUCTORS, API_COURSES} from "../api/BaseApi";
 import { green, red } from "@material-ui/core/colors";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -28,7 +28,7 @@ const CoursesDetails = ({ location, course }) => {
     setIsLoading(true);
 
     axios
-      .get(`${API_BASE_URL}/instructors`)
+      .get(API_INSTRUCTORS)
       .then((response) => {
         const newData = filterInstructors(response.data);
         setInstructors(newData);
@@ -55,7 +55,7 @@ const CoursesDetails = ({ location, course }) => {
   } 
 
   const handleDelete = async () => {
-    await axios.delete(`${API_BASE_URL}/courses/${id}`);
+    await axios.delete(`${API_COURSES}/${id}`);
     history.push("/courses");
   }
 

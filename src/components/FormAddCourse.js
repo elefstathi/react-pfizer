@@ -16,7 +16,7 @@ import axios from 'axios';
 import moment from "moment";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import API_BASE_URL from "../api/BaseApi";
+import API_BASE_URL, { API_COURSES } from "../api/BaseApi";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -43,7 +43,7 @@ const FormAddCourse = (course) => {
   const [formData, setFormData] = useState( course ? course : {});
 
   const onFinish = (values) => {
-    axios.post(`${API_BASE_URL}/courses`, formData)
+    axios.post(API_COURSES, formData)
       .then(response => history.push("/courses"))
       .catch((error) => {alert('Something went wrong', 'Try again!')})
   };
