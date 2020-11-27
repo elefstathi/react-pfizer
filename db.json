@@ -101,8 +101,8 @@
     },
     {
       "dates": {
-        "end_date": "2020-12-22",
-        "start_date": "2020-12-20"
+        "end_date": "2020-11-29",
+        "start_date": "2020-11-28"
       },
       "title": "Functional Programming",
       "duration": "2 days",
@@ -115,7 +115,8 @@
         "early_bird": 800,
         "normal": 400
       },
-      "id": "Wofl5F7"
+      "id": "Wofl5F7",
+      "description": "yolo"
     },
     {
       "title": "Swift",

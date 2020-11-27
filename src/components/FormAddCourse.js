@@ -16,7 +16,7 @@ import axios from 'axios';
 import moment from "moment";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import API_BASE_URL, { API_COURSES } from "../api/BaseApi";
+import { API_COURSES } from "../api/BaseApi";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -37,13 +37,17 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const FormAddCourse = (course) => {
+const FormAddCourse = ({location}) => {
   const [form] = Form.useForm();
   const history = useHistory();
+  const course = history.location.state;
+  console.log(history);
+  console.log(course)
   const [formData, setFormData] = useState( course ? course : {});
+  console.log(formData);
 
   const onFinish = (values) => {
-   addCourse();
+   course ? updateCourse() : addCourse();
   };
 
   const addCourse = async () => {
@@ -57,17 +61,16 @@ const FormAddCourse = (course) => {
     }
   }  
 
-  const updateCourse = async (id) => {
+  const updateCourse = async () => {
     try {
-      const resp = await axios.put(`${API_COURSES}/${id}`, formData);
+      const resp = await axios.put(`${API_COURSES}/${formData.id}`, formData);
       if (resp) {
-        history.push(`/courses/${id}`);
+        history.push(`/courses_details/${formData.id}`, formData);
       }
     } catch (error) {
       alert('Something went wrong!', 'Try again later!')
     }
   }
-
 
   function onChangeStartDate(date, e) {
     setFormData((formData) => ({
@@ -182,15 +185,22 @@ const FormAddCourse = (course) => {
           form={form}
           name="register"
           onFinish={onFinish}
-          initialValues={{
-            residence: ["zhejiang", "hangzhou", "xihu"],
-            prefix: "86",
-          }}
           scrollToFirstError
+          initialValues={{
+            title: formData.title,
+            duration: formData.duration,
+            imagePath: formData.imagePath,
+            instructors: formData.instructors,
+            open: formData.open,
+            description: formData.description,
+            normal: formData.price.normal,
+            early_bird: formData.price.early_bird,
+            // end_date: formData.dates.end_date,
+            // start_date: formData.dates.start_date
+          }}
         >
           <Form.Item
             name="title"
-            value={formData.title}
             label="Title"
             rules={[
               {
@@ -200,12 +210,11 @@ const FormAddCourse = (course) => {
               },
             ]}
           >
-            <Input onChange={onTitleChange} placeholder="Title" />
+            <Input onChange={onTitleChange} placeholder="Title" value={formData.title}/>
           </Form.Item>
           <Form.Item
             name="duration"
             label="Duration"
-            value={formData.duration}
             rules={[
               {
                 required: true,
@@ -214,19 +223,18 @@ const FormAddCourse = (course) => {
               },
             ]}
           >
-            <Input onChange={onDurationChange} placeholder="Duration" />
+            <Input onChange={onDurationChange} placeholder="Duration"  value={formData.duration}/>
           </Form.Item>
           <Form.Item
             name="imagePath"
             label="Image path"
-            value={formData.imagePath}
             rules={[
               {
                 message: "Please input a valid image url!",
               },
             ]}
           >
-            <Input onChange={onImgPathChange} placeholder="Image Path" />
+            <Input onChange={onImgPathChange} placeholder="Image Path" value={formData.imagePath}/>
           </Form.Item>
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}
@@ -234,7 +242,7 @@ const FormAddCourse = (course) => {
             label="Bookable"
             valuePropName="checked"
           >
-            <Switch onChange={onChangeBookable} />
+            <Switch onChange={onChangeBookable} checked={formData.open}/>
           </Form.Item>
           <Form.Item
             wrapperCol={{ ...layout.wrapperCol }}

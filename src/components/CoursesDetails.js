@@ -15,7 +15,7 @@ const CoursesDetails = ({ location, course }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
-  const { title, id, description, duration, dates, imagePath, instructors, open, price} = course;
+  const { title, id, description, duration, dates, imagePath, instructors, open, price } = course;
 
   const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px",
   };
@@ -50,9 +50,8 @@ const CoursesDetails = ({ location, course }) => {
   }
 
   const handleEdit = () => {
-    const objData = { title, id, description, duration, dates, imagePath, instructors, open, price};
-    console.log(objData);
-    history.push('/add_new_course', objData);
+    console.log(course);
+    history.push('/add_new_course', course);
   } 
 
   const handleDelete = async () => {
