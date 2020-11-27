@@ -19,11 +19,12 @@ const CourseCardId = (course) => {
     background: "#005f6a",
     borderRadius: "5px",
     position: "absolute",
+    flex: 1,
     width: 50,
     height: 30,
     bottom: 5,
     right: 20,
-    zIndex: 100,
+    // zIndex: 100,
   };
 
   return (

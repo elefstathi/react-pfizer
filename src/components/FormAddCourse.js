@@ -14,7 +14,7 @@ import {
 } from "antd";
 import axios from 'axios';
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { API_COURSES } from "../api/BaseApi";
 
@@ -49,6 +49,12 @@ const FormAddCourse = ({location}) => {
   const onFinish = (values) => {
    course ? updateCourse() : addCourse();
   };
+
+  useEffect(() => {
+    if(course === undefined) {
+        setFormData({});
+    }
+  }, [course])
 
   const addCourse = async () => {
     try {
@@ -195,8 +201,8 @@ const FormAddCourse = ({location}) => {
             description: formData.description,
             normal: formData.price.normal,
             early_bird: formData.price.early_bird,
-            // end_date: formData.dates.end_date,
-            // start_date: formData.dates.start_date
+            end_date: moment(formData.dates.end_date),
+            start_date: moment(formData.dates.start_date)
           } : {}}
         >
           <Form.Item
