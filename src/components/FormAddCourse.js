@@ -186,7 +186,7 @@ const FormAddCourse = ({location}) => {
           name="register"
           onFinish={onFinish}
           scrollToFirstError
-          initialValues={{
+          initialValues={course ? {
             title: formData.title,
             duration: formData.duration,
             imagePath: formData.imagePath,
@@ -197,7 +197,7 @@ const FormAddCourse = ({location}) => {
             early_bird: formData.price.early_bird,
             // end_date: formData.dates.end_date,
             // start_date: formData.dates.start_date
-          }}
+          } : {}}
         >
           <Form.Item
             name="title"
