@@ -44,6 +44,7 @@ const CoursesDetails = ({ location, course }) => {
     fetchInstructors();
   }, [fetchInstructors]);
 
+  //check if course instructors id match with the ids that we got from previous api call  
   const filterInstructors = (data) => {
     return instructors.map((id) => data.filter((item) => item.id === id ) );
   }

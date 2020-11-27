@@ -43,10 +43,31 @@ const FormAddCourse = (course) => {
   const [formData, setFormData] = useState( course ? course : {});
 
   const onFinish = (values) => {
-    axios.post(API_COURSES, formData)
-      .then(response => history.push("/courses"))
-      .catch((error) => {alert('Something went wrong', 'Try again!')})
+   addCourse();
   };
+
+  const addCourse = async () => {
+    try {
+      const resp = await axios.post(API_COURSES, formData);
+      if (resp) {
+        history.push("/courses");
+      }
+    } catch (error) {
+      alert('Something went wrong!', 'Try again later!')
+    }
+  }  
+
+  const updateCourse = async (id) => {
+    try {
+      const resp = await axios.put(`${API_COURSES}/${id}`, formData);
+      if (resp) {
+        history.push(`/courses/${id}`);
+      }
+    } catch (error) {
+      alert('Something went wrong!', 'Try again later!')
+    }
+  }
+
 
   function onChangeStartDate(date, e) {
     setFormData((formData) => ({
@@ -145,10 +166,6 @@ const FormAddCourse = (course) => {
         normal: value,
       },
     }));
-  }
-
-  function disableForEndDate(current) {
-    return current && current < moment(formData.dates.start_date);
   }
 
   function disabledDate(current) {
@@ -323,7 +340,7 @@ const FormAddCourse = (course) => {
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 4 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              {course ? 'Update' : 'Submit' }
             </Button>
           </Form.Item>
         </Form>

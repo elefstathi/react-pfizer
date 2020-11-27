@@ -98,6 +98,41 @@
         "01"
       ],
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+    },
+    {
+      "dates": {
+        "end_date": "2020-12-22",
+        "start_date": "2020-12-20"
+      },
+      "title": "Functional Programming",
+      "duration": "2 days",
+      "instructors": [
+        "01",
+        "02"
+      ],
+      "open": true,
+      "price": {
+        "early_bird": 800,
+        "normal": 400
+      },
+      "id": "Wofl5F7"
+    },
+    {
+      "title": "Swift",
+      "duration": "5 Fridays",
+      "instructors": [
+        "02"
+      ],
+      "open": true,
+      "dates": {
+        "start_date": "2020-12-25",
+        "end_date": "2021-01-22"
+      },
+      "price": {
+        "early_bird": 1000,
+        "normal": 500
+      },
+      "id": "Ye9jxs4"
     }
   ],
   "instructors": [
