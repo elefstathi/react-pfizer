@@ -20,8 +20,4 @@ const colStyle = {
   borderRadius: "5px"
 };
 
-// const styles = StyleSheet.create({
-//     colStyle : { border: 2, padding: '8px 0', borderColor: '#ececec', background: '#fff' },
-// })
-
 export default StatisticItem;

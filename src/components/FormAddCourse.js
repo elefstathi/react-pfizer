@@ -21,22 +21,6 @@ import { API_COURSES } from "../api/BaseApi";
 const { Content } = Layout;
 const { Title } = Typography;
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 14 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 14 },
-    sm: { span: 16 },
-  },
-};
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
 const FormAddCourse = ({location}) => {
   const [form] = Form.useForm();
   const history = useHistory();
@@ -364,3 +348,19 @@ const FormAddCourse = ({location}) => {
 };
 
 export default FormAddCourse;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 14 },
+    sm: { span: 4 },
+  },
+  wrapperCol: {
+    xs: { span: 14 },
+    sm: { span: 16 },
+  },
+};
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};

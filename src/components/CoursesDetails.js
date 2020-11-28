@@ -17,12 +17,6 @@ const CoursesDetails = ({ location, course }) => {
   const history = useHistory();
   const { title, id, description, duration, dates, imagePath, instructors, open, price } = course;
 
-  const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px",
-  };
-  const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px",
-  };
-  const rowStyle = { flex: 1, justifyContent: "space-between", marginRight: 5 };
-
   const fetchInstructors = useCallback(() => {
     setError(false);
     setIsLoading(true);
@@ -139,3 +133,9 @@ const CoursesDetails = ({ location, course }) => {
 };
 
 export default CoursesDetails;
+
+const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px",
+};
+const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px",
+};
+const rowStyle = { flex: 1, justifyContent: "space-between", marginRight: 5 };

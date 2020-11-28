@@ -54,9 +54,9 @@ const CourseTable = () => {
     getLastCourses()
   );
 };
+export default CourseTable;
 
 const btnStyle = { color: "#fff", background: "#005f6a", borderRadius: "5px", marginLeft: "auto" };
 const containerStyle = { padding: "30px", background: "#fff" };
 const cardStyle = { width: "100%" };
 
-export default CourseTable;
