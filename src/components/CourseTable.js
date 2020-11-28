@@ -1,5 +1,5 @@
 import { Card, Spin, Table } from "antd";
-import FetchData from "./FetchData";
+import FetchData from "../api/FetchData";
 import API_BASE_URL from "../api/BaseApi";
 import { courseTableColumns } from "./CourseTableColumns";
 import { useState } from "react";

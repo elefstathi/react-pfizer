@@ -1,6 +1,6 @@
 import CourseCardId from "./CourseCardId";
 import { Spin, List, Typography } from "antd";
-import FetchData from "./FetchData";
+import FetchData from "../api/FetchData";
 import API_BASE_URL from "../api/BaseApi";
 const { Title } = Typography;
 

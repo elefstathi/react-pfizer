@@ -5,7 +5,7 @@ import "antd/dist/antd.css";
 import StatisticItem from "./StatisticItem";
 import CoursesDetails from "./CoursesDetails";
 import Courses from "./Courses";
-import FetchData from "./FetchData";
+import FetchData from "../api/FetchData";
 import CourseTable from "./CourseTable";
 import API_BASE_URL from "../api/BaseApi";
 import { useHistory } from "react-router-dom";
