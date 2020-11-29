@@ -17,6 +17,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { API_COURSES } from "../api/BaseApi";
+import { useApiCall } from "../hooks/useApiCall";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -28,9 +29,11 @@ const FormAddCourse = () => {
   // console.log(history);
   // console.log(course)
   const [formData, setFormData] = useState( course ? course : {});
-  console.log(formData);
+  // const { sendData: editCourse } = useApiCall(`${API_COURSES}/${formData.id}`, 'PUT');
+  // const { sendData: addCourse } = useApiCall(API_COURSES, 'POST', formData);
+  // console.log(formData);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     queryData();
   };
 

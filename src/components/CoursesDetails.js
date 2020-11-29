@@ -98,14 +98,14 @@ const CoursesDetails = ({ course }) => {
 
   const renderInstructors = (instructor) => {
     return (
-        <>
+        <div key={instructor.id}>
         <Title level={3}>
             {instructor.name.first} {instructor.name.last} ({instructor.dob})
         </Title>
         <Text>Email: {instructor.email} | </Text>
         <a target="_blank" href={instructor.linkedin}>Linkedin</a><br/>
         <Text>{instructor.bio}</Text>
-        </>
+        </div>
     );
   };
 
