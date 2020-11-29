@@ -20,7 +20,7 @@ function App() {
             render={(props) => <Courses {...props} />}
           />
           <Route
-            path="/courses_details/:courseId"
+            path="/courses_details/:courseId" //nested url
             render={(props) => <CoursesDetails {...props} course="" />}
           />
           <Route

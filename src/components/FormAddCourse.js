@@ -191,8 +191,10 @@ const FormAddCourse = () => {
               {
                 required: true,
                 message: "Please input the title of the course!",
-                whitespace: true,
+                whitespace: true
               },
+              { max: 40, message: 'Title must be at least 40 characters.' },
+              { type: 'regexp', message: "Wrong format!",  pattern: new RegExp(/[^A-Za-z0-9]+/g) }
             ]}
           >
             <Input onChange={onTitleChange} placeholder="Title" value={formData.title}/>
@@ -215,8 +217,10 @@ const FormAddCourse = () => {
             label="Image path"
             rules={[
               {
+                type: 'url',
                 message: "Please input a valid image url!",
-              },
+                whitespace: true
+              }
             ]}
           >
             <Input onChange={onImgPathChange} placeholder="Image Path" value={formData.imagePath}/>
@@ -264,7 +268,16 @@ const FormAddCourse = () => {
               </Row>
             </Checkbox.Group>
           </Form.Item>
-          <Form.Item name="description" label="Description">
+          <Form.Item name="description" label="Description" 
+            rules={[ 
+              {
+                max: 400, message: 'Text must be at least 400 characters.'
+              },
+              {
+                type: 'regexp', message: "Wrong format!",  pattern: new RegExp(/[^A-Za-z0-9]!@#\$%\^\&*\)\(+=._-]+/g)
+              }
+            ]}
+          >
             <Input.TextArea onChange={onDescriptionChange} />
           </Form.Item>
           <Form.Item label="Dates">
