@@ -21,44 +21,39 @@ import { API_COURSES } from "../api/BaseApi";
 const { Content } = Layout;
 const { Title } = Typography;
 
-const FormAddCourse = ({location}) => {
+const FormAddCourse = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const course = history.location.state;
-  console.log(history);
-  console.log(course)
+  // console.log(history);
+  // console.log(course)
   const [formData, setFormData] = useState( course ? course : {});
   console.log(formData);
 
   const onFinish = (values) => {
-   course ? updateCourse() : addCourse();
+    queryData();
   };
 
-  useEffect(() => {
-    if(course === undefined) {
-        setFormData({});
-    }
-  }, [course])
+  // useEffect(() => {
+  //   if(course === undefined) {
+  //       setFormData({});
+  //   }
+  // }, [course])
 
-  const addCourse = async () => {
+  const queryData = async () => {
+    const method = course ? 'PUT': 'POST';
+    const url = course ? `${API_COURSES}/${formData.id}` : API_COURSES ;
     try {
-      const resp = await axios.post(API_COURSES, formData);
-      if (resp) {
-        history.push("/courses");
-      }
+      await axios({
+        url: url,
+        method: method,
+        data: formData
+      })
+      alert(course ? `${formData.title} course updated!` : 'The new course added succesfully!')
     } catch (error) {
-      alert('Something went wrong!', 'Try again later!')
-    }
-  }  
-
-  const updateCourse = async () => {
-    try {
-      const resp = await axios.put(`${API_COURSES}/${formData.id}`, formData);
-      if (resp) {
-        history.push(`/courses_details/${formData.id}`, formData);
-      }
-    } catch (error) {
-      alert('Something went wrong!', 'Try again later!')
+      alert('Something went wrong!')
+    } finally {
+      history.push("/");
     }
   }
 

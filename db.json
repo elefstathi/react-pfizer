@@ -134,6 +134,24 @@
         "normal": 500
       },
       "id": "Ye9jxs4"
+    },
+    {
+      "title": "Yolo",
+      "duration": "1 day",
+      "instructors": [
+        "01"
+      ],
+      "description": "test",
+      "dates": {
+        "start_date": "2020-11-30",
+        "end_date": "2020-12-17"
+      },
+      "price": {
+        "early_bird": 400,
+        "normal": 100
+      },
+      "id": "QIgmk36",
+      "open": true
     }
   ],
   "instructors": [
