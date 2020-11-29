@@ -135,24 +135,6 @@
       },
       "id": "Ye9jxs4",
       "imagePath": "http://localhost:3001/angular.png"
-    },
-    {
-      "title": "test",
-      "duration": "defehhh",
-      "open": false,
-      "instructors": [
-        "01"
-      ],
-      "description": "vfevgbwr",
-      "dates": {
-        "start_date": "2020-11-30",
-        "end_date": "2020-11-30"
-      },
-      "price": {
-        "early_bird": 433,
-        "normal": 54334
-      },
-      "id": "V_Iubn1"
     }
   ],
   "instructors": [
