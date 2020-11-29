@@ -14,7 +14,7 @@ import {
 } from "antd";
 import axios from 'axios';
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { API_COURSES } from "../api/BaseApi";
 import { useApiCall } from "../hooks/useApiCall";
@@ -26,22 +26,13 @@ const FormAddCourse = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const course = history.location.state;
-  // console.log(history);
-  // console.log(course)
   const [formData, setFormData] = useState( course ? course : {});
   // const { sendData: editCourse } = useApiCall(`${API_COURSES}/${formData.id}`, 'PUT');
   // const { sendData: addCourse } = useApiCall(API_COURSES, 'POST', formData);
-  // console.log(formData);
 
   const onFinish = async (values) => {
     queryData();
   };
-
-  // useEffect(() => {
-  //   if(course === undefined) {
-  //       setFormData({});
-  //   }
-  // }, [course])
 
   const queryData = async () => {
     const method = course ? 'PUT': 'POST';
@@ -56,7 +47,7 @@ const FormAddCourse = () => {
     } catch (error) {
       alert('Something went wrong!')
     } finally {
-      history.push("/");
+      history.push("/courses");
     }
   }
 
@@ -121,7 +112,7 @@ const FormAddCourse = () => {
         if (newState.instructors !== undefined) {
           const index = newState.instructors.indexOf(value);
           if (index > -1) {
-            newState.instructors.splice(index, 1); //remove one element at index
+            newState.instructors.splice(index, 1); //remove one element at index position
           }
         }
       }
