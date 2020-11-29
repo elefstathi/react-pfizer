@@ -15,13 +15,13 @@ function App() {
           <Link to="/add_new_course"></Link>
         </nav>
         <Switch>
-          <Route path="/" render={(props) => <Dashboard {...props} />} />
+          <Route exact path="/" render={(props) => <Dashboard {...props} />} />
           <Route path="/courses"
             render={(props) => <Courses {...props} />}
           />
           <Route
             path="/courses_details/:courseId" //nested url
-            render={(props) => <CoursesDetails {...props} course="" />}
+            render={(props) => <CoursesDetails {...props} />}
           />
           <Route
             path="/add_new_course"

@@ -1,4 +1,4 @@
-import { Typography, Row, Layout, Spin, Modal, Button} from "antd";
+import { Typography, Row, Layout, Spin, Modal, Button } from "antd";
 import React, { useState } from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
@@ -6,14 +6,17 @@ import API_BASE_URL, { API_INSTRUCTORS, API_COURSES } from "../api/BaseApi";
 import { green, red, blue } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
 import { useApiCall } from "../hooks/useApiCall";
+import HeaderComponent from "./Header";
 
 const { Title, Text } = Typography;
 const { Content, Footer } = Layout;
 
-const CoursesDetails = ({ course }) => {
+const CoursesDetails = () => {
   const [error, setError] = useState(null);
-  const [ show, setModal] = useState(false);
+  const [show, setModal] = useState(false);
   const history = useHistory();
+  const course = history.location.state;
+
   const {
     title,
     id,
@@ -42,18 +45,23 @@ const CoursesDetails = ({ course }) => {
     }
   };
 
-  const showModal= (e) => { setModal(true) };
+  const showModal = (e) => {
+    setModal(true);
+  };
 
-  const handleCancel = (e) => { setModal(false) };
+  const handleCancel = (e) => {
+    setModal(false);
+  };
 
   const renderCourseDetail = () => {
     return (
       <>
-        <div style={{ padding: 30 }}>
-          <Title level={2}>
-            {title}({id})
-          </Title>
-          <Layout>
+        <Layout>
+          <HeaderComponent />
+          <div style={{ padding: 30 }}>
+            <Title level={2}>
+              {title}({id})
+            </Title>
             <Content
               style={{
                 margin: "24px 16px 0",
@@ -114,18 +122,26 @@ const CoursesDetails = ({ course }) => {
               onOk={handleDelete}
               onCancel={handleCancel}
               footer={[
-                <Button key="back" style={{background: "#3b3b3b", color: '#fff'}} onClick={handleCancel}>
+                <Button
+                  key="back"
+                  style={{ background: "#3b3b3b", color: "#fff" }}
+                  onClick={handleCancel}
+                >
                   Cancel
                 </Button>,
-                <Button key="submit" style={{background: blue[900], color: "#fff"}} onClick={handleDelete}>
+                <Button
+                  key="submit"
+                  style={{ background: blue[900], color: "#fff" }}
+                  onClick={handleDelete}
+                >
                   Delete
-               </Button>
+                </Button>,
               ]}
             >
               <Text>Are you sure you want to delete "{title}" course?</Text>
             </Modal>
-          </Layout>
-        </div>
+          </div>
+        </Layout>
       </>
     );
   };

@@ -1,4 +1,5 @@
 import { Modal, Button } from 'antd';
+import React from "react";
 
 class CustomModal extends React.Component {
   state = { visible: false };

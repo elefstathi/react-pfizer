@@ -1,7 +1,8 @@
 import CourseCardId from "./CourseCardId";
-import { Spin, List, Typography } from "antd";
+import { Spin, List, Typography, Layout } from "antd";
 import FetchData from "../api/FetchData";
 import API_BASE_URL from "../api/BaseApi";
+import HeaderComponent from "./Header";
 const { Title } = Typography;
 
 const Courses = () => {
@@ -11,6 +12,8 @@ const Courses = () => {
         isLoading ? (
           <Spin size="large" />
         ) : (
+          <Layout>
+          <HeaderComponent />
           <div style={{padding: 30 }}>
           <Title level={2}>All Courses</Title>
           <List
@@ -23,6 +26,7 @@ const Courses = () => {
             )}
           ></List>
           </div>
+          </Layout>
         )
       }
     </FetchData>

@@ -14,6 +14,7 @@ const CourseCardId = (course) => {
   const onHandleClicked = () => {
     history.push(`/courses_details/${courseRecord.id}`, courseRecord);
   };
+  
   const btnStyle = {
     color: "#fff",
     background: "#005f6a",

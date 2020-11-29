@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { API_COURSES } from "../api/BaseApi";
 import { useApiCall } from "../hooks/useApiCall";
+import HeaderComponent from "./Header";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -156,7 +157,9 @@ const FormAddCourse = () => {
   }
 
   return (
-    <Layout style={{ padding: 30 }}>
+    <Layout>
+      <HeaderComponent/>
+      <div style={{padding: 30 }}>
       <Title level={2}>{course ? 'Edit Course' : 'Add Course'}</Title>
       <Content>
         <Form
@@ -345,6 +348,7 @@ const FormAddCourse = () => {
           </Form.Item>
         </Form>
       </Content>
+      </div>
     </Layout>
   );
 };
