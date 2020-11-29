@@ -114,8 +114,6 @@ const CoursesDetails = ({ course }) => {
 
 export default CoursesDetails;
 
-const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px",
-};
-const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px",
-};
+const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px" };
+const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px" };
 const rowStyle = { flex: 1, justifyContent: "space-between", marginRight: 5 };
