@@ -8,11 +8,11 @@ import { useHistory } from "react-router-dom";
 const { Text } = Typography;
 
 const CourseCardId = (course) => {
-  const record = course.course;
+  const courseRecord = course.course;
   const history = useHistory();
-
+  
   const onHandleClicked = () => {
-    history.push(`/courses_details/${record.id}`, record);
+    history.push(`/courses_details/${courseRecord.id}`, courseRecord);
   };
   const btnStyle = {
     color: "#fff",
@@ -23,35 +23,34 @@ const CourseCardId = (course) => {
     width: 50,
     height: 30,
     bottom: 5,
-    right: 20,
-    // zIndex: 100,
+    right: 20
   };
 
   return (
     <Card
-      title={record.title}
+      title={courseRecord.title}
       headStyle={{ flex: 1, flexShrink: 1 }}
       hoverable
       style={{ width: 290, height: 500 }}
-      cover={record.imagePath && <img src={`${API_BASE_URL}/${record.imagePath}`} />}
+      cover={courseRecord.imagePath && <img src={ courseRecord.imagePath.includes('http') ? courseRecord.imagePath : `${API_BASE_URL}${courseRecord.imagePath}`} />}
     >
       <Row>
         <Text>
-          Price: <b>{record.price.normal}£</b> | Bookable:
+          Price: <b>{courseRecord.price.normal}£</b> | Bookable:
         </Text>
-        {record.open ? (
+        {courseRecord.open ? (
           <CheckOutlinedIcon style={{ color: green[500] }} />
         ) : (
-          <ClearOutlinedIcon style={{ color: red }} />
+          <ClearOutlinedIcon style={{ color: red[500] }} />
         )}
       </Row>
       <Text>
-        Duration: <b>{record.duration}</b>
+        Duration: <b>{courseRecord.duration}</b>
       </Text>
       <Row>
         <Text>
-          Dates:<b>{record.dates.start_date}</b> -{" "}
-          <b>{record.dates.end_date}</b>
+          Dates:<b>{courseRecord.dates.start_date}</b> -{" "}
+          <b>{courseRecord.dates.end_date}</b>
         </Text>
       </Row>
       <button style={btnStyle} onClick={() => onHandleClicked()}>

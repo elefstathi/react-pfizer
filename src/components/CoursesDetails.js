@@ -1,10 +1,9 @@
 import { Typography, Row, Layout, Spin, Col } from "antd";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
 import API_BASE_URL, {API_INSTRUCTORS, API_COURSES} from "../api/BaseApi";
-import { green, red } from "@material-ui/core/colors";
-import axios from "axios";
+import { green, red, blue } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
 import { useApiCall } from "../hooks/useApiCall";
 
@@ -49,7 +48,7 @@ const CoursesDetails = ({ course }) => {
             >
              { imagePath && (<img
                 style={{ width: "50%", height: "40%" }}
-                src={`${API_BASE_URL}/${imagePath}`}
+                src={imagePath.includes('http') ? imagePath : `${API_BASE_URL}${imagePath}`}
               />
             )} 
             </Content>
@@ -66,7 +65,7 @@ const CoursesDetails = ({ course }) => {
                       style={{ color: green[500], height: 18 }}
                     />
                   ) : (
-                    <ClearOutlinedIcon style={{ color: red }} />
+                    <ClearOutlinedIcon style={{ color: red[500] }} />
                   )}
                 </Text>
                 <Text>
@@ -114,6 +113,6 @@ const CoursesDetails = ({ course }) => {
 
 export default CoursesDetails;
 
-const editStyle = { color: "#fff", background: "#002BC6", borderRadius: "5px" };
-const deleteStyle = { color: "#fff", background: "#DB1F2A", borderRadius: "5px" };
+const editStyle = { color: "#fff", background: blue[900], borderRadius: "5px" };
+const deleteStyle = { color: "#fff", background: red[500], borderRadius: "5px" };
 const rowStyle = { flex: 1, justifyContent: "space-between", marginRight: 5 };

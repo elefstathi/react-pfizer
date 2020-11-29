@@ -133,12 +133,13 @@
         "early_bird": 1000,
         "normal": 500
       },
-      "id": "Ye9jxs4"
+      "id": "Ye9jxs4",
+      "imagePath": "http://localhost:3001/angular.png"
     },
     {
       "title": "test",
       "duration": "defehhh",
-      "open": true,
+      "open": false,
       "instructors": [
         "01"
       ],

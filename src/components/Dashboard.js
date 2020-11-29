@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import WelcomeCard from "./WelcomeCard";
 import { Layout, Menu, Row, Spin, Typography } from "antd";
 import "antd/dist/antd.css";
