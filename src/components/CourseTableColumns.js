@@ -16,7 +16,7 @@ export const courseTableColumns = () => {
       title: "Bookable",
       dataIndex: "open",
       key: "open",
-      render: (text) => checkIcon(text),
+      render: (value) => checkIcon(value),
     },
     {
       title: "Price",
@@ -49,11 +49,12 @@ export const courseTableColumns = () => {
     <> {
       open 
       ? <CheckOutlinedIcon style={{ color: green[500] }}/> 
-      : <ClearOutlinedIcon style={{ color: red }}/> 
+      : <ClearOutlinedIcon style={{ color: red[500] }}/> 
       }
     </>
   )
   const textStyle = { color: "#000" };
 
+  //not render ui, returns an array
   return columns;
 }

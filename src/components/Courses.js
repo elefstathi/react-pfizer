@@ -4,7 +4,7 @@ import FetchData from "../api/FetchData";
 import API_BASE_URL from "../api/BaseApi";
 const { Title } = Typography;
 
-const Courses = ({ location }) => {
+const Courses = () => {
   return (
     <FetchData url={API_BASE_URL} resource="courses">
       {(data, isLoading) =>

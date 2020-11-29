@@ -4,8 +4,10 @@ import API_BASE_URL from "../api/BaseApi";
 import { courseTableColumns } from "./CourseTableColumns";
 import { useState } from "react";
 
+const columns = courseTableColumns();
+
+
 const CourseTable = () => {
-  const columns = courseTableColumns();
   const [viewAll, setFlag] = useState(false);
   
   const renderTable = ( data ) => {

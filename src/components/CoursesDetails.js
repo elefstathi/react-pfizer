@@ -6,51 +6,30 @@ import API_BASE_URL, {API_INSTRUCTORS, API_COURSES} from "../api/BaseApi";
 import { green, red } from "@material-ui/core/colors";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useApiCall } from "../hooks/useApiCall";
 
 const { Title, Text } = Typography;
 const { Content, Footer } = Layout;
 
-const CoursesDetails = ({ location, course }) => {
-  const [courseInstructors, setInstructors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+const CoursesDetails = ({ course }) => {
   const [error, setError] = useState(null);
   const history = useHistory();
   const { title, id, description, duration, dates, imagePath, instructors, open, price } = course;
-
-  const fetchInstructors = useCallback(() => {
-    setError(false);
-    setIsLoading(true);
-
-    axios
-      .get(API_INSTRUCTORS)
-      .then((response) => {
-        const newData = filterInstructors(response.data);
-        setInstructors(newData);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetchInstructors();
-  }, [fetchInstructors]);
-
-  //check if course instructors id match with the ids that we got from previous api call  
-  const filterInstructors = (data) => {
-    return instructors.map((id) => data.filter((item) => item.id === id ) );
-  }
+  const { sendData } = useApiCall(`${API_COURSES}/${id}`, 'DELETE');
+  const { data: respInstructors, isLoading } = useApiCall(API_INSTRUCTORS);
 
   const handleEdit = () => {
-    console.log(course);
     history.push('/add_new_course', course);
   } 
 
   const handleDelete = async () => {
-    await axios.delete(`${API_COURSES}/${id}`);
-    history.push("/courses");
+    try {
+      const resp = await sendData();
+      history.push("/courses");
+    } catch {
+      setError('ERROR IN DELETE');
+      alert(error)
+    }
   }
 
   const renderCourseDetail = () => {
@@ -108,7 +87,8 @@ const CoursesDetails = ({ location, course }) => {
                 </button>
               </Row>
               <Title level={2}>Instructors</Title>
-                {courseInstructors.map((item) => renderInstructors(item[0]))}
+                {respInstructors && instructors.map((id) => respInstructors.filter((item) => item.id === id))
+                  .map((instructor) => renderInstructors(instructor[0]))}
             </Footer>
           </Layout>
         </div>
