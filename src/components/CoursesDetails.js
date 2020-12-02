@@ -32,7 +32,7 @@ const CoursesDetails = () => {
   const { data: respInstructors, isLoading } = useApiCall(API_INSTRUCTORS);
 
   const handleEdit = () => {
-    history.push("/add_new_course", course);
+    history.push(`/edit_course/${id}`, course);
   };
 
   const handleDelete = async () => {

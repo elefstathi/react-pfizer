@@ -27,6 +27,10 @@ function App() {
             path="/add_new_course"
             render={(props) => <FormAddCourse {...props} course="" />}
           />
+          <Route
+            path="/edit_course/:courseId"
+            render={(props) => <FormAddCourse {...props} course="" />}
+          />
         </Switch>
       </div>
     </Router>
